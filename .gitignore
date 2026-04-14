@@ -65,6 +65,9 @@ credentials.json
 # Claude Code local memory (session-specific, not for repo)
 # Note: .claude/ is intentionally tracked for team skill sharing
 
+# Git worktrees (isolated development environments)
+.worktrees/
+
 # Test outputs
 test-results/
 coverage/
