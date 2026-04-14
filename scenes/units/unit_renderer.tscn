@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://unit_renderer_scene"]
+
+[ext_resource type="Script" path="res://scenes/units/unit_renderer.gd" id="script_unit_renderer"]
+
+[node name="UnitRenderer" type="Node2D"]
+script = ExtResource("script_unit_renderer")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

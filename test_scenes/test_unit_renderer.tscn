@@ -1,0 +1,567 @@
+[gd_scene format=3 uid="uid://byl1kk8x85l5n"]
+
+[ext_resource type="Texture2D" uid="uid://d2jnat12vgair" path="res://assets/sprites/ID00001_decrypted.png" id="3_khc4a"]
+[ext_resource type="Script" uid="uid://de8kb2boylbp2" path="res://test/test_signal_emitter.gd" id="script_signal_emitter"]
+[ext_resource type="Script" uid="uid://dwsp21x0i1dic" path="res://test_scenes/test_unit_renderer.gd" id="script_test_controller"]
+[ext_resource type="Script" uid="uid://dwgo66xy0ftvt" path="res://scenes/units/unit_renderer.gd" id="script_unit_renderer"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bany0"]
+atlas = ExtResource("3_khc4a")
+region = Rect2(2176, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5t6og"]
+atlas = ExtResource("3_khc4a")
+region = Rect2(2304, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4s03k"]
+atlas = ExtResource("3_khc4a")
+region = Rect2(2048, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vbk27"]
+atlas = ExtResource("3_khc4a")
+region = Rect2(2432, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oytrv"]
+atlas = ExtResource("3_khc4a")
+region = Rect2(2176, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6fgen"]
+atlas = ExtResource("3_khc4a")
+region = Rect2(2304, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4k4tn"]
+atlas = ExtResource("3_khc4a")
+region = Rect2(2048, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g4i2e"]
+atlas = ExtResource("3_khc4a")
+region = Rect2(2432, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mcv3i"]
+atlas = ExtResource("3_khc4a")
+region = Rect2(2176, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_stbxn"]
+atlas = ExtResource("3_khc4a")
+region = Rect2(2304, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o5d57"]
+atlas = ExtResource("3_khc4a")
+region = Rect2(2048, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eabph"]
+atlas = ExtResource("3_khc4a")
+region = Rect2(2432, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3yj53"]
+atlas = ExtResource("3_khc4a")
+region = Rect2(2176, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ewcr8"]
+atlas = ExtResource("3_khc4a")
+region = Rect2(2304, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_papib"]
+atlas = ExtResource("3_khc4a")
+region = Rect2(2048, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vvvhg"]
+atlas = ExtResource("3_khc4a")
+region = Rect2(2432, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j2hmg"]
+atlas = ExtResource("3_khc4a")
+region = Rect2(2176, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jnf8p"]
+atlas = ExtResource("3_khc4a")
+region = Rect2(2304, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_spil4"]
+atlas = ExtResource("3_khc4a")
+region = Rect2(2048, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_isjb1"]
+atlas = ExtResource("3_khc4a")
+region = Rect2(2432, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cylbf"]
+atlas = ExtResource("3_khc4a")
+region = Rect2(2176, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ftacl"]
+atlas = ExtResource("3_khc4a")
+region = Rect2(2304, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m5lsa"]
+atlas = ExtResource("3_khc4a")
+region = Rect2(2048, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jo1ug"]
+atlas = ExtResource("3_khc4a")
+region = Rect2(2432, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hnqhs"]
+atlas = ExtResource("3_khc4a")
+region = Rect2(2176, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7qy88"]
+atlas = ExtResource("3_khc4a")
+region = Rect2(2304, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2wixg"]
+atlas = ExtResource("3_khc4a")
+region = Rect2(2048, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ghqy"]
+atlas = ExtResource("3_khc4a")
+region = Rect2(2432, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_38012"]
+atlas = ExtResource("3_khc4a")
+region = Rect2(2176, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_frk8j"]
+atlas = ExtResource("3_khc4a")
+region = Rect2(2304, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_726qu"]
+atlas = ExtResource("3_khc4a")
+region = Rect2(2048, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p0lie"]
+atlas = ExtResource("3_khc4a")
+region = Rect2(2432, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_212k0"]
+atlas = ExtResource("3_khc4a")
+region = Rect2(2176, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aba0d"]
+atlas = ExtResource("3_khc4a")
+region = Rect2(2304, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d6ifj"]
+atlas = ExtResource("3_khc4a")
+region = Rect2(2048, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ls5p7"]
+atlas = ExtResource("3_khc4a")
+region = Rect2(2432, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7fm6q"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bany0")
+}],
+"loop": false,
+"name": &"attack_east",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5t6og")
+}],
+"loop": false,
+"name": &"attack_north",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4s03k")
+}],
+"loop": false,
+"name": &"attack_south",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vbk27")
+}],
+"loop": false,
+"name": &"attack_west",
+"speed": 10.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oytrv")
+}],
+"loop": false,
+"name": &"destroy_east",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6fgen")
+}],
+"loop": false,
+"name": &"destroy_north",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4k4tn")
+}],
+"loop": false,
+"name": &"destroy_south",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g4i2e")
+}],
+"loop": false,
+"name": &"destroy_west",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mcv3i")
+}],
+"loop": false,
+"name": &"enter_east",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_stbxn")
+}],
+"loop": false,
+"name": &"enter_north",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o5d57")
+}],
+"loop": false,
+"name": &"enter_south",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eabph")
+}],
+"loop": false,
+"name": &"enter_west",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3yj53")
+}],
+"loop": false,
+"name": &"exit_east",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ewcr8")
+}],
+"loop": false,
+"name": &"exit_north",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_papib")
+}],
+"loop": false,
+"name": &"exit_south",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vvvhg")
+}],
+"loop": false,
+"name": &"exit_west",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j2hmg")
+}],
+"loop": false,
+"name": &"hit_east",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jnf8p")
+}],
+"loop": false,
+"name": &"hit_north",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_spil4")
+}],
+"loop": false,
+"name": &"hit_south",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_isjb1")
+}],
+"loop": false,
+"name": &"hit_west",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cylbf")
+}],
+"loop": true,
+"name": &"idle_east",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ftacl")
+}],
+"loop": true,
+"name": &"idle_north",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m5lsa")
+}],
+"loop": true,
+"name": &"idle_south",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jo1ug")
+}],
+"loop": true,
+"name": &"idle_west",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hnqhs")
+}],
+"loop": false,
+"name": &"land_east",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7qy88")
+}],
+"loop": false,
+"name": &"land_north",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2wixg")
+}],
+"loop": false,
+"name": &"land_south",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ghqy")
+}],
+"loop": false,
+"name": &"land_west",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_38012")
+}],
+"loop": true,
+"name": &"move_east",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_frk8j")
+}],
+"loop": true,
+"name": &"move_north",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_726qu")
+}],
+"loop": true,
+"name": &"move_south",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p0lie")
+}],
+"loop": true,
+"name": &"move_west",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_212k0")
+}],
+"loop": false,
+"name": &"takeoff_east",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aba0d")
+}],
+"loop": false,
+"name": &"takeoff_north",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d6ifj")
+}],
+"loop": false,
+"name": &"takeoff_south",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ls5p7")
+}],
+"loop": false,
+"name": &"takeoff_west",
+"speed": 10.0
+}]
+
+[node name="TestUnitRenderer" type="Node2D" unique_id=1487805797]
+script = ExtResource("script_test_controller")
+
+[node name="UnitRenderer" type="Node2D" parent="." unique_id=846871661]
+position = Vector2(308, 260)
+script = ExtResource("script_unit_renderer")
+sprite_sheet = ExtResource("3_khc4a")
+unit_index = 4
+shadow_width = 34.199999999999996
+shadow_height = 17.099999999999998
+shadow_base_offset = 45.0
+airborne_shadow_offset = 0.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="UnitRenderer" unique_id=265735148]
+sprite_frames = SubResource("SpriteFrames_7fm6q")
+animation = &"idle_south"
+frame_progress = 0.27580264
+
+[node name="TestSignalEmitter" type="Node" parent="." unique_id=1652233850]
+script = ExtResource("script_signal_emitter")
+
+[node name="UIPanel" type="Control" parent="." unique_id=1475100347]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 183.0
+offset_top = 28.0
+offset_right = 483.0
+offset_bottom = 578.0
+grow_horizontal = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIPanel" unique_id=1092574301]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LblTitle" type="Label" parent="UIPanel/VBoxContainer" unique_id=224939320]
+layout_mode = 2
+text = "UnitRenderer 测试面板"
+
+[node name="LblStatus" type="Label" parent="UIPanel/VBoxContainer" unique_id=1060479409]
+layout_mode = 2
+text = "方向: SOUTH | Airborne: false | Disabled: false"
+
+[node name="LblAnimationNote" type="Label" parent="UIPanel/VBoxContainer" unique_id=743051234]
+layout_mode = 2
+text = "注: 所有动画状态现为程序化动画（Enter/Takeoff/Land/Attack/Hit/Destroy/Exit）"
+
+[node name="AnimationButtons" type="HBoxContainer" parent="UIPanel/VBoxContainer" unique_id=1034945921]
+layout_mode = 2
+
+[node name="BtnDeployed" type="Button" parent="UIPanel/VBoxContainer/AnimationButtons" unique_id=490683249]
+layout_mode = 2
+text = "Deployed"
+
+[node name="BtnTakeoff" type="Button" parent="UIPanel/VBoxContainer/AnimationButtons" unique_id=1603002186]
+layout_mode = 2
+text = "Takeoff"
+
+[node name="BtnIdle" type="Button" parent="UIPanel/VBoxContainer/AnimationButtons" unique_id=1721425412]
+layout_mode = 2
+text = "Idle"
+
+[node name="BtnMove" type="Button" parent="UIPanel/VBoxContainer/AnimationButtons" unique_id=242809220]
+layout_mode = 2
+text = "Move"
+
+[node name="BtnAttack" type="Button" parent="UIPanel/VBoxContainer/AnimationButtons" unique_id=1870477344]
+layout_mode = 2
+text = "Attack"
+
+[node name="BtnHit" type="Button" parent="UIPanel/VBoxContainer/AnimationButtons" unique_id=1977507802]
+layout_mode = 2
+text = "Hit"
+
+[node name="BtnLand" type="Button" parent="UIPanel/VBoxContainer/AnimationButtons" unique_id=2008743933]
+layout_mode = 2
+text = "Land"
+
+[node name="BtnDestroy" type="Button" parent="UIPanel/VBoxContainer/AnimationButtons" unique_id=1197291203]
+layout_mode = 2
+text = "Destroy"
+
+[node name="BtnExit" type="Button" parent="UIPanel/VBoxContainer/AnimationButtons" unique_id=67886303]
+layout_mode = 2
+text = "Exit"
+
+[node name="StateButtons" type="HBoxContainer" parent="UIPanel/VBoxContainer" unique_id=1764509524]
+layout_mode = 2
+
+[node name="BtnAirborne" type="Button" parent="UIPanel/VBoxContainer/StateButtons" unique_id=2066103531]
+layout_mode = 2
+text = "Airborne: false"
+
+[node name="BtnDisabled" type="Button" parent="UIPanel/VBoxContainer/StateButtons" unique_id=1319668084]
+layout_mode = 2
+text = "Disabled: false"
+
+[node name="DirectionButtons" type="HBoxContainer" parent="UIPanel/VBoxContainer" unique_id=332000977]
+layout_mode = 2
+
+[node name="BtnSouth" type="Button" parent="UIPanel/VBoxContainer/DirectionButtons" unique_id=996498158]
+layout_mode = 2
+text = "南"
+
+[node name="BtnEast" type="Button" parent="UIPanel/VBoxContainer/DirectionButtons" unique_id=361435728]
+layout_mode = 2
+text = "东"
+
+[node name="BtnNorth" type="Button" parent="UIPanel/VBoxContainer/DirectionButtons" unique_id=2032482627]
+layout_mode = 2
+text = "北"
+
+[node name="BtnWest" type="Button" parent="UIPanel/VBoxContainer/DirectionButtons" unique_id=1149280516]
+layout_mode = 2
+text = "西"

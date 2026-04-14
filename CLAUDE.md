@@ -6,6 +6,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 有问题时，使用 AskUserQuestion 提问工具，一个问题一个问题地问，不要一次问多个问题。
 
+## Restrictions
+
+禁止使用 Python 脚本生成游戏素材（图片、纹理等）。素材生成应使用 Godot 内置的 Image 类或 GDScript 脚本。
+
 ## Project Overview
 
 这是一个 Godot 4.6 移动端战棋游戏项目，复刻《超级机器人大战》(Super Robot Wars) 的核心玩法。项目目标是实现网格地图战术战斗系统，包含回合制战斗、机甲单位管理、战斗演出等核心功能。

@@ -10,6 +10,12 @@ var PilotDataScript := preload("res://scripts/pilots/pilot_data.gd")
 var UnitDataScript := preload("res://scripts/units/unit_data.gd")
 var UnitInstanceScript := preload("res://scripts/units/unit_instance.gd")
 
+# 预加载资源（避免 duplicated-load lint 错误）
+var _player_unit := preload("res://resources/units/example_player.tres")
+var _enemy_unit := preload("res://resources/units/example_enemy.tres")
+var _player_pilot := preload("res://resources/pilots/example_player_pilot.tres")
+var _enemy_pilot := preload("res://resources/pilots/example_enemy_pilot.tres")
+
 
 func test_all_example_resources_loadable() -> void:
 	# 加载所有示例资源并验证
@@ -43,12 +49,11 @@ func test_all_example_resources_loadable() -> void:
 
 
 func test_player_unit_has_correct_weapons() -> void:
-	var player_unit = load("res://resources/units/example_player.tres")
-	assert_eq(player_unit.weapons.size(), 2, "玩家单位应有 2 个武器")
+	assert_eq(_player_unit.weapons.size(), 2, "玩家单位应有 2 个武器")
 
 	# 验证武器引用有效
-	var saber = player_unit.weapons[0]
-	var rifle = player_unit.weapons[1]
+	var saber = _player_unit.weapons[0]
+	var rifle = _player_unit.weapons[1]
 
 	assert_eq(saber.name, "光束军刀", "第一个武器应为光束军刀")
 	assert_eq(rifle.name, "步枪", "第二个武器应为步枪")
@@ -56,11 +61,8 @@ func test_player_unit_has_correct_weapons() -> void:
 
 func test_complete_unit_instance_creation() -> void:
 	# 创建完整的单位实例
-	var unit_data = load("res://resources/units/example_player.tres")
-	var pilot_data = load("res://resources/pilots/example_player_pilot.tres")
-
 	var instance = UnitInstanceScript.new()
-	instance.initialize(unit_data, pilot_data)
+	instance.initialize(_player_unit, _player_pilot)
 
 	assert_eq(instance.unit_data.name, "RX-78 高达", "单位名称应为 RX-78 高达")
 	assert_eq(instance.pilot_data.name, "阿姆罗", "驾驶员名称应为阿姆罗")
@@ -69,11 +71,8 @@ func test_complete_unit_instance_creation() -> void:
 
 
 func test_enemy_unit_instance_creation() -> void:
-	var unit_data = load("res://resources/units/example_enemy.tres")
-	var pilot_data = load("res://resources/pilots/example_enemy_pilot.tres")
-
 	var instance = UnitInstanceScript.new()
-	instance.initialize(unit_data, pilot_data)
+	instance.initialize(_enemy_unit, _enemy_pilot)
 
 	assert_eq(instance.unit_data.name, "MS-06 扎克II", "单位名称应为 MS-06 扎克II")
 	assert_eq(instance.pilot_data.name, "夏亚", "驾驶员名称应为夏亚")
@@ -81,8 +80,5 @@ func test_enemy_unit_instance_creation() -> void:
 
 
 func test_faction_relationship() -> void:
-	var player_pilot = load("res://resources/pilots/example_player_pilot.tres")
-	var enemy_pilot = load("res://resources/pilots/example_enemy_pilot.tres")
-
-	assert_false(player_pilot.is_same_faction(enemy_pilot), "玩家和敌方不应同阵营")
-	assert_true(player_pilot.is_same_faction(player_pilot), "相同驾驶员应同阵营")
+	assert_false(_player_pilot.is_same_faction(_enemy_pilot), "玩家和敌方不应同阵营")
+	assert_true(_player_pilot.is_same_faction(_player_pilot), "相同驾驶员应同阵营")
