@@ -90,6 +90,8 @@ godot --headless -s addons/gut/gut_cmdln.gd -gdir=res://test/test_file.gd
 
 项目使用 OpenSpec 进行变更管理。规格文档位于 `openspec/specs/` 和 `openspec/changes/`。
 
+完整 Git 工作流指南见 `openspec/openspec-git-workflow.md`。
+
 可用命令：
 - `/opsx:explore` - 探索模式，思考问题
 - `/opsx:propose` - 提出新变更

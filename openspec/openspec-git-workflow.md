@@ -1,9 +1,3 @@
----
-name: openspec-git-workflow
-description: OpenSpec 变更管理与 Git Feature Branch 工作流配合指南
-type: reference
----
-
 # OpenSpec × Git 工作流指南
 
 ## 工作流概览
