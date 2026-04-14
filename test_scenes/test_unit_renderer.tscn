@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://byl1kk8x85l5n"]
 
 [ext_resource type="Texture2D" uid="uid://d2jnat12vgair" path="res://assets/sprites/ID00001_decrypted.png" id="3_khc4a"]
-[ext_resource type="Script" uid="uid://de8kb2boylbp2" path="res://test/test_signal_emitter.gd" id="script_signal_emitter"]
+[ext_resource type="Script" path="res://scripts/test_helpers/signal_emitter.gd" id="script_signal_emitter"]
 [ext_resource type="Script" uid="uid://dwsp21x0i1dic" path="res://test_scenes/test_unit_renderer.gd" id="script_test_controller"]
 [ext_resource type="Script" uid="uid://dwgo66xy0ftvt" path="res://scenes/units/unit_renderer.gd" id="script_unit_renderer"]
 
@@ -463,7 +463,7 @@ sprite_frames = SubResource("SpriteFrames_7fm6q")
 animation = &"idle_south"
 frame_progress = 0.27580264
 
-[node name="TestSignalEmitter" type="Node" parent="." unique_id=1652233850]
+[node name="SignalEmitter" type="Node" parent="." unique_id=1652233850]
 script = ExtResource("script_signal_emitter")
 
 [node name="UIPanel" type="Control" parent="." unique_id=1475100347]

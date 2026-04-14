@@ -9,7 +9,7 @@ var _is_disabled: bool = false
 
 # === 节点引用 ===
 @onready var unit_renderer: UnitRenderer = $UnitRenderer
-@onready var signal_emitter: TestSignalEmitter = $TestSignalEmitter
+@onready var signal_emitter: SignalEmitter = $SignalEmitter
 
 # === 按钮引用 ===
 @onready var btn_deployed: Button = $UIPanel/VBoxContainer/AnimationButtons/BtnDeployed

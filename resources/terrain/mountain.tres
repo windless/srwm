@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="TerrainData" format=3]
+
+[ext_resource type="Script" path="res://scripts/terrain/terrain_data.gd" id="script"]
+
+[resource]
+script = ExtResource("script")
+name = "山地"
+terrain_type = 1
+move_cost = 2
+defense_bonus = 10
+is_passable = true
+tile_atlas_coords = Vector2i(1, 0)
