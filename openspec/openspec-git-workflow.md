@@ -21,8 +21,8 @@ type: reference
 │  └──────────┘        └──────────┘         └──────────┘         │
 │                                                                  │
 │  openspec/           feature/xxx            openspec/changes/   │
-│  changes/new/        分支开发               archive/            │
-│  (活跃变更)           Worktree隔离          YYYY-MM-DD-xxx/     │
+│  changes/<变更名>/    分支开发               archive/            │
+│  (活跃变更)           单分支开发             YYYY-MM-DD-xxx/    │
 │                                                                  │
 └─────────────────────────────────────────────────────────────────┘
 ```
@@ -41,29 +41,28 @@ type: reference
 ### Phase 1: 提出变更 (`/opsx:propose`)
 
 ```bash
-# 1. 从 master 创建 Proposal 分支（可选，仅用于文档追踪）
+# 1. 确保 master 分支干净
 git checkout master
-git checkout -b proposal/<变更名>
+git status  # 应无未提交变更
 
 # 2. 运行 propose 命令，生成 proposal.md, design.md, tasks.md
 /opsx:propose
 
 # 3. 提交 OpenSpec 文档变更
 git add openspec/changes/<变更名>/
-git commit -m "docs: propose <变更名>"
+git commit -m "docs(openspec): propose <变更名>"
 ```
 
 ### Phase 2: 实现变更 (`/opsx:apply`)
 
 ```bash
-# 1. 创建隔离 Worktree（推荐）
-git worktree add .worktrees/<变更名> -b feature/<变更名>
+# 1. 创建 Feature 分支
+git checkout -b feature/<变更名>
 
-# 2. 进入 Worktree 开始实现
-cd .worktrees/<变更名>
+# 2. 运行 apply 命令，按 tasks.md 实现功能
 /opsx:apply openspec/changes/<变更名>/tasks.md
 
-# 3. 运行项目测试验证
+# 3. 验证代码质量
 ./scripts/check.sh
 ./scripts/test.sh
 
@@ -72,20 +71,19 @@ git add <实现的文件>
 git commit -m "feat(<模块>): implement <功能描述>"
 ```
 
-### Phase 3: 归档变更 (`/opsx:archive`)
+### Phase 3: 合并并归档 (`/opsx:archive`)
 
 ```bash
-# 1. 返回主工作目录
-cd /Users/libright/Documents/mine/godot/srwm
+# 1. 切回 master
+git checkout master
 
-# 2. 合并 Feature 分支到 master
-git merge .worktrees/<变更名> --no-ff -m "Merge feature/<变更名> into master"
+# 2. 合并 Feature 分支
+git merge feature/<变更名> --no-ff -m "Merge feature/<变更名> into master"
 
 # 3. 运行归档命令（自动移动到 archive/）
 /opsx:archive
 
-# 4. 清理 Worktree
-git worktree remove .worktrees/<变更名>
+# 4. 删除 Feature 分支
 git branch -d feature/<变更名>
 
 # 5. 推送到远程（如果有）
@@ -101,54 +99,7 @@ git push origin master
 | `refactor` | 重构 | `refactor(battle): extract turn management logic` |
 | `docs` | 文档 | `docs: add openspec-git-workflow guide` |
 | `test` | 测试 | `test(grid-map): add coordinate validation tests` |
-| `chore` | 其他 | `chore: add worktree directory to gitignore` |
-
-## Worktree 使用指南
-
-### 创建 Worktree
-
-```bash
-# 检查目录是否被忽略
-git check-ignore -q .worktrees  # 应返回 0（表示已忽略）
-
-# 创建新 Worktree
-git worktree add .worktrees/<变更名> -b feature/<变更名>
-
-# 查看所有 Worktree
-git worktree list
-```
-
-### Worktree 目录结构
-
-```
-.worktrees/
-├── grid-map-system/       # GridMapSystem 变更
-│   ├── scenes/
-│   ├── scripts/
-│   └── openspec/
-├── unit-system/           # UnitSystem 变更
-│   └── ...
-└── battle-animation/      # BattleAnimation 变更
-```
-
-### 清理 Worktree
-
-```bash
-# 移除 Worktree（分支保留）
-git worktree remove .worktrees/<变更名>
-
-# 删除分支（合并后）
-git branch -d feature/<变更名>
-```
-
-## 为什么使用 Worktree？
-
-| 场景 | 无 Worktree | 有 Worktree |
-|-----|------------|------------|
-| 同时开发多个变更 | 需要频繁 stash/checkout | 每个变更独立目录 |
-| 测试其他变更代码 | 会覆盖当前工作 | 可在另一目录测试 |
-| 中途需要处理紧急任务 | stash 当前工作，切换分支 | 直接切换到主目录处理 |
-| IDE 打开多个项目 | 不可能 | 每个 Worktree 独立 IDE 窗口 |
+| `chore` | 其他 | `chore: add gitignore rules` |
 
 ## OpenSpec 目录结构
 
@@ -172,6 +123,74 @@ openspec/
 │       └── ...
 ```
 
+## 示例：完整变更流程
+
+```bash
+# === Phase 1: 提出变更 ===
+git checkout master
+/opsx:propose  # 输入变更描述
+
+# 生成的文件：
+#   openspec/changes/battle-animation/proposal.md
+#   openspec/changes/battle-animation/design.md
+#   openspec/changes/battle-animation/tasks.md
+
+git add openspec/changes/battle-animation/
+git commit -m "docs(openspec): propose battle-animation"
+
+# === Phase 2: 实现变更 ===
+git checkout -b feature/battle-animation
+
+# 按 tasks.md 逐项实现
+# 任务 1: 创建 BattleAnimation 场景模板
+# 任务 2: 实现演出触发和结束流程
+# ...
+
+/opsx:apply openspec/changes/battle-animation/tasks.md
+
+# 验证
+./scripts/check.sh
+./scripts/test.sh
+
+# 提交实现代码
+git add scenes/battle/
+git commit -m "feat(battle): implement animation scene template"
+git add scripts/battle_controller.gd
+git commit -m "feat(battle): add animation trigger logic"
+
+# === Phase 3: 合并并归档 ===
+git checkout master
+git merge feature/battle-animation --no-ff
+
+# 归档（移动变更到 archive/）
+/opsx:archive
+
+# 清理
+git branch -d feature/battle-animation
+```
+
+## 处理紧急任务
+
+当正在 Feature 分支开发时，需要处理紧急任务：
+
+```bash
+# 1. 保存当前工作（如果未完成）
+git stash  # 或直接提交 WIP
+
+# 2. 切回 master 处理紧急任务
+git checkout master
+git checkout -b fix/urgent-issue
+
+# 3. 修复并合并
+git commit -m "fix: ..."
+git checkout master
+git merge fix/urgent-issue --no-ff
+
+# 4. 返回 Feature 分支继续开发
+git checkout feature/<变更名>
+git stash pop  # 如果之前 stash 了
+```
+
 ## 快速参考命令
 
 ```bash
@@ -182,14 +201,15 @@ openspec/
 /opsx:archive      # 归档完成的变更
 
 # Git 命令
-git worktree list                          # 查看 Worktree
-git worktree add .worktrees/xxx -b feature/xxx  # 创建
-git worktree remove .worktrees/xxx         # 移除
-git branch -d feature/xxx                  # 删除分支
-git merge feature/xxx --no-ff              # 合并分支
+git checkout master                    # 切换到主分支
+git checkout -b feature/xxx            # 创建 Feature 分支
+git merge feature/xxx --no-ff          # 合并分支
+git branch -d feature/xxx              # 删除已合并分支
+git branch -a                          # 查看所有分支
+git log --oneline -10                  # 查看最近提交
 
 # 项目验证命令
-./scripts/check.sh                         # 代码质量检查
-./scripts/test.sh                          # 运行测试
-./scripts/run.sh                           # 启动编辑器
+./scripts/check.sh                     # 代码质量检查
+./scripts/test.sh                      # 运行测试
+./scripts/run.sh                       # 启动编辑器
 ```
