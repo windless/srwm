@@ -1,0 +1,11 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/pilots/pilot_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+name = "夏亚"
+level = 5
+hp_growth = 0.08
+en_growth = 0.04
+faction = 1

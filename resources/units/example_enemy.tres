@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/units/unit_data.gd" id="1"]
+[ext_resource type="Resource" path="res://resources/weapons/beam_saber.tres" id="2"]
+[ext_resource type="Resource" path="res://resources/weapons/rifle.tres" id="3"]
+
+[resource]
+script = ExtResource("1")
+name = "MS-06 扎克II"
+max_hp = 150
+max_en = 80
+armor = 12
+mobility = 6
+weapons = [ExtResource("2"), ExtResource("3")]

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/weapons/weapon_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+name = "步枪"
+power = 120
+range_min = 2
+range_max = 5
+en_cost = 10
+accuracy = 85
+type = 1
