@@ -1,0 +1,142 @@
+[gd_scene format=3 uid="uid://xgqs08e7k51q"]
+
+[ext_resource type="Texture2D" uid="uid://r126dhku7hcm" path="res://assets/tiles/m05_space_tex_000_decrypted.png" id="1_terrain_tex"]
+[ext_resource type="Script" uid="uid://uoy4tr6xboq2" path="res://scripts/grid_map/grid_map_system.gd" id="2_grid_map_system"]
+[ext_resource type="Script" uid="uid://dd2bfhfvairlg" path="res://scripts/grid_map/grid_visualization.gd" id="3_grid_visualization"]
+[ext_resource type="Script" uid="uid://dg6682n5jkjwj" path="res://scripts/battle/battle_camera.gd" id="4_battle_camera"]
+[ext_resource type="Script" uid="uid://h53vf0oqfpy7" path="res://scripts/battle/battle_hud.gd" id="6_battle_hud"]
+[ext_resource type="Script" uid="uid://cwxewyskyavxi" path="res://scripts/battle/battle_map_controller.gd" id="7_battle_controller"]
+[ext_resource type="Texture2D" uid="uid://d2jnat12vgair" path="res://assets/sprites/ID00001_decrypted.png" id="7_mjn88"]
+[ext_resource type="PackedScene" path="res://scenes/units/unit_renderer.tscn" id="8_unit_renderer"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_battle"]
+texture = ExtResource("1_terrain_tex")
+texture_region_size = Vector2i(64, 32)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_battle"]
+tile_shape = 1
+tile_size = Vector2i(64, 32)
+sources/0 = SubResource("TileSetAtlasSource_battle")
+
+[node name="BattleMap" type="Node2D" unique_id=1953862030]
+script = ExtResource("7_battle_controller")
+battle_camera = NodePath("BattleCamera")
+grid_map_system = NodePath("GridMapSystem")
+unit_placement = NodePath("")
+battle_hud = NodePath("BattleHUD")
+
+[node name="BattleCamera" type="Camera2D" parent="." unique_id=859625372]
+script = ExtResource("4_battle_camera")
+cell_size = Vector2(128, 64)
+
+[node name="GridMapSystem" type="Node" parent="." unique_id=228277226]
+script = ExtResource("2_grid_map_system")
+width = 20
+height = 20
+
+[node name="TerrainLayer" type="TileMapLayer" parent="." unique_id=1835992627]
+tile_set = SubResource("TileSet_battle")
+
+[node name="GridVisualization" type="Node2D" parent="." unique_id=1511666724]
+script = ExtResource("3_grid_visualization")
+grid_line_width = 2.0
+cell_size = Vector2(128, 64)
+map_width = 20
+map_height = 20
+
+[node name="UnitsLayer" type="Node2D" parent="." unique_id=1303373325]
+
+[node name="UnitRenderer2" parent="UnitsLayer" unique_id=652175394 instance=ExtResource("8_unit_renderer")]
+position = Vector2(128, 117)
+sprite_sheet = ExtResource("7_mjn88")
+unit_index = 6
+direction = 1
+shadow_width = 31.2
+shadow_height = 15.6
+shadow_base_offset = 45.0
+
+[node name="UnitRenderer" parent="UnitsLayer" unique_id=112617640 instance=ExtResource("8_unit_renderer")]
+position = Vector2(191, 217)
+sprite_sheet = ExtResource("7_mjn88")
+unit_index = 1
+shadow_width = 36.0
+shadow_height = 18.0
+shadow_base_offset = 45.0
+
+[node name="BattleHUD" type="CanvasLayer" parent="." unique_id=1272600091]
+script = ExtResource("6_battle_hud")
+unit_info_panel = NodePath("UnitInfoPanel")
+unit_name_label = NodePath("UnitInfoPanel/VBoxContainer/UnitNameLabel")
+unit_hp_label = NodePath("UnitInfoPanel/VBoxContainer/HPLabel")
+unit_en_label = NodePath("UnitInfoPanel/VBoxContainer/ENLabel")
+pilot_name_label = NodePath("UnitInfoPanel/VBoxContainer/PilotLabel")
+action_buttons_container = NodePath("ActionButtons")
+move_button = NodePath("ActionButtons/MoveButton")
+attack_button = NodePath("ActionButtons/AttackButton")
+wait_button = NodePath("ActionButtons/WaitButton")
+
+[node name="UnitInfoPanel" type="PanelContainer" parent="BattleHUD" unique_id=410959517]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -150.0
+offset_top = 20.0
+offset_right = 150.0
+offset_bottom = 100.0
+grow_horizontal = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BattleHUD/UnitInfoPanel" unique_id=1272263914]
+layout_mode = 2
+
+[node name="UnitNameLabel" type="Label" parent="BattleHUD/UnitInfoPanel/VBoxContainer" unique_id=835372557]
+layout_mode = 2
+text = "Unit Name"
+
+[node name="HPLabel" type="Label" parent="BattleHUD/UnitInfoPanel/VBoxContainer" unique_id=1062617152]
+layout_mode = 2
+text = "HP: 100/100"
+
+[node name="ENLabel" type="Label" parent="BattleHUD/UnitInfoPanel/VBoxContainer" unique_id=726670479]
+layout_mode = 2
+text = "EN: 50/50"
+
+[node name="PilotLabel" type="Label" parent="BattleHUD/UnitInfoPanel/VBoxContainer" unique_id=425717776]
+layout_mode = 2
+text = "Pilot: Name"
+
+[node name="ActionButtons" type="HBoxContainer" parent="BattleHUD" unique_id=716040008]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -150.0
+offset_top = -80.0
+offset_right = 150.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[node name="MoveButton" type="Button" parent="BattleHUD/ActionButtons" unique_id=824890113]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+text = "Move"
+
+[node name="AttackButton" type="Button" parent="BattleHUD/ActionButtons" unique_id=801412346]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+text = "Attack"
+
+[node name="WaitButton" type="Button" parent="BattleHUD/ActionButtons" unique_id=674626582]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+text = "Wait"
