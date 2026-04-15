@@ -172,7 +172,13 @@ func get_coord_from_screen(screen_pos: Vector2) -> GridCoord:
 ## 从网格坐标获取屏幕坐标
 func get_screen_from_coord(coord: GridCoord) -> Vector2:
 	if tile_layer == null:
-		return coord.to_screen(Vector2(64, 32))
+		# 使用 TileMap 的 tile_size（从 tile_set 获取）
+		var cell_size_v2: Vector2 = Vector2(64, 32)
+		if tile_layer != null and tile_layer.tile_set != null:
+			var ts_size: Vector2i = tile_layer.tile_set.tile_size
+			# 等距投影需要 2x
+			cell_size_v2 = Vector2(ts_size.x, ts_size.y) * 2
+		return coord.to_screen(cell_size_v2)
 	return tile_layer.to_global(
 		tile_layer.map_to_local(Vector2i(coord.x, coord.y))
 	)

@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://action_menu_scene"]
+
+[ext_resource type="Script" path="res://scripts/ui/action_menu.gd" id="1_action_menu_script"]
+
+[node name="ActionMenu" type="PanelContainer"]
+script = ExtResource("1_action_menu_script")
+option_font_size = 18
+animation_duration = 0.15
+option_min_height = 48.0
+option_spacing = 8

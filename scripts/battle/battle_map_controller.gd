@@ -17,6 +17,9 @@ extends Node
 ## BattleHUD 引用
 @export var battle_hud: BattleHUD
 
+## GridCursor 引用
+@export var grid_cursor: GridCursor
+
 ## 测试地图数据路径
 @export var test_map_data_path: String = ""
 
@@ -28,13 +31,28 @@ extends Node
 
 
 func _ready() -> void:
+	# 从 NodePath 获取节点引用（如果 @export 没正确解析）
+	if battle_camera == null:
+		battle_camera = get_node_or_null("BattleCamera")
+	if grid_map_system == null:
+		grid_map_system = get_node_or_null("GridMapSystem")
+	if battle_hud == null:
+		battle_hud = get_node_or_null("BattleHUD")
+	if grid_cursor == null:
+		grid_cursor = get_node_or_null("GridCursor") as GridCursor
+
 	_connect_signals()
 	_initialize_scene()
 
 
 ## 连接系统信号
 func _connect_signals() -> void:
-	# BattleCamera -> UnitPlacement/BattleHUD
+	# BattleCamera -> GridCursor
+	if battle_camera != null and grid_cursor != null:
+		battle_camera.cursor_moved.connect(_on_cursor_moved)
+		battle_camera.cursor_confirmed.connect(_on_cursor_confirmed)
+
+	# BattleCamera -> UnitPlacement/BattleHUD (旧信号兼容)
 	if battle_camera != null:
 		battle_camera.grid_cell_selected.connect(_on_grid_cell_selected)
 
@@ -43,9 +61,16 @@ func _connect_signals() -> void:
 		unit_placement.unit_placed.connect(_on_unit_placed)
 		unit_placement.unit_removed.connect(_on_unit_removed)
 
+	# BattleHUD -> Controller
+	if battle_hud != null:
+		battle_hud.action_requested.connect(_on_action_requested)
+
 	# 设置 GridMapSystem 引用
 	if battle_camera != null and grid_map_system != null:
 		battle_camera.grid_map_system = grid_map_system
+
+	if grid_cursor != null and grid_map_system != null:
+		grid_cursor.grid_map_system = grid_map_system
 
 	# 设置 UnitPlacement 引用
 	if unit_placement != null:
@@ -144,6 +169,33 @@ func _on_grid_cell_selected(coord: GridCoord) -> void:
 	print("Grid cell selected: %s, Unit: %s" % [coord, unit])
 
 
+## 处理光标移动事件
+func _on_cursor_moved(coord: GridCoord) -> void:
+	# 更新光标位置（通过网格坐标计算格子中心）
+	if grid_cursor != null:
+		grid_cursor.set_coord(coord)
+		grid_cursor.set_confirmed_state(false)
+
+
+## 处理光标确认事件
+func _on_cursor_confirmed(coord: GridCoord) -> void:
+	# 设置光标确认状态
+	if grid_cursor != null:
+		grid_cursor.set_confirmed_state(true)
+
+	# 查询选中位置的单位
+	var unit: UnitInstance = null
+	if unit_placement != null:
+		unit = unit_placement.get_unit_at(coord)
+
+	# 更新 HUD
+	if battle_hud != null:
+		battle_hud.on_unit_selection_changed(unit)
+
+	# 打印调试信息
+	print("Cursor confirmed: %s, Unit: %s" % [coord, unit])
+
+
 ## 处理单位放置事件
 func _on_unit_placed(unit: UnitInstance, coord: GridCoord) -> void:
 	print("Unit placed: %s at %s" % [unit.unit_data.name, coord])
@@ -155,6 +207,31 @@ func _on_unit_removed(unit: UnitInstance, coord: GridCoord) -> void:
 
 	# 如果移除的是选中单位，清除 HUD
 	if battle_hud != null:
-		if unit == battle_hud._selected_unit:
+		if unit == battle_hud.get_selected_unit():
 			battle_hud.hide_unit_info()
-			battle_hud.hide_action_buttons()
+			battle_hud.hide_action_menu()
+
+
+## 处理行动请求事件
+func _on_action_requested(action_type: int, unit: UnitInstance) -> void:
+	# 打印调试信息（占位实现）
+	var action_name: String = ""
+	match action_type:
+		ActionMenu.ActionType.MOVE:
+			action_name = "MOVE"
+		ActionMenu.ActionType.ATTACK:
+			action_name = "ATTACK"
+		ActionMenu.ActionType.SPIRIT:
+			action_name = "SPIRIT"
+		ActionMenu.ActionType.WAIT:
+			action_name = "WAIT"
+
+	print("Action requested: %s for unit %s" % [action_name, unit.unit_data.name])
+
+	# 占位实现：待机后清除选择
+	if action_type == ActionMenu.ActionType.WAIT:
+		if battle_hud != null:
+			battle_hud.hide_unit_info()
+			battle_hud.hide_action_menu()
+		if grid_cursor != null:
+			grid_cursor.hide_cursor()

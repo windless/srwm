@@ -1,10 +1,13 @@
 ## BattleHUD
 ## 战场 HUD 界面系统
-## 显示单位信息、回合状态、操作按钮
+## 显示单位信息、回合状态、行动菜单
 ## 支持移动端触控友好的 UI 设计
 
 class_name BattleHUD
 extends CanvasLayer
+
+## 信号：行动请求（转发自 ActionMenu）
+signal action_requested(action_type: int, unit: UnitInstance)
 
 ## 单位信息面板节点
 @export var unit_info_panel: Control
@@ -21,17 +24,8 @@ extends CanvasLayer
 ## 驾驶员名称标签
 @export var pilot_name_label: Label
 
-## 操作按钮容器
-@export var action_buttons_container: Control
-
-## 移动按钮
-@export var move_button: Button
-
-## 攻击按钮
-@export var attack_button: Button
-
-## 待机按钮
-@export var wait_button: Button
+## ActionMenu 组件引用
+@export var action_menu: ActionMenu
 
 ## 当前选中的单位
 var _selected_unit: UnitInstance = null
@@ -43,15 +37,12 @@ var _is_player_unit_selected: bool = false
 func _ready() -> void:
 	# 初始化 UI 状态
 	hide_unit_info()
-	hide_action_buttons()
+	if action_menu != null:
+		action_menu.hide_menu()
 
-	# 连接按钮信号
-	if move_button != null:
-		move_button.pressed.connect(_on_move_button_pressed)
-	if attack_button != null:
-		attack_button.pressed.connect(_on_attack_button_pressed)
-	if wait_button != null:
-		wait_button.pressed.connect(_on_wait_button_pressed)
+	# 连接 ActionMenu 信号
+	if action_menu != null:
+		action_menu.action_selected.connect(_on_action_selected)
 
 
 ## 显示单位信息
@@ -102,32 +93,32 @@ func hide_unit_info() -> void:
 		unit_info_panel.visible = false
 
 
-## 显示操作按钮（仅玩家单位）
-func show_action_buttons() -> void:
+## 显示行动菜单（仅玩家单位）
+func show_action_menu() -> void:
 	if not _is_player_unit_selected:
 		return
 
-	if action_buttons_container != null:
-		action_buttons_container.visible = true
+	if action_menu != null:
+		action_menu.set_unit(_selected_unit)
 
 
-## 隐藏操作按钮
-func hide_action_buttons() -> void:
-	if action_buttons_container != null:
-		action_buttons_container.visible = false
+## 隐藏行动菜单
+func hide_action_menu() -> void:
+	if action_menu != null:
+		action_menu.clear_unit()
 
 
 ## 处理单位选择变化
 func on_unit_selection_changed(unit: UnitInstance) -> void:
 	if unit == null:
 		hide_unit_info()
-		hide_action_buttons()
+		hide_action_menu()
 	else:
 		show_unit_info(unit)
 		if not unit.is_enemy():
-			show_action_buttons()
+			show_action_menu()
 		else:
-			hide_action_buttons()
+			hide_action_menu()
 
 
 ## 处理单位 HP 变化
@@ -139,22 +130,14 @@ func on_unit_hp_changed(unit: UnitInstance) -> void:
 			unit_hp_label.text = "HP: %d/%d" % [unit.current_hp, max_hp]
 
 
-## 移动按钮按下回调
-func _on_move_button_pressed() -> void:
-	# TODO: 实现移动逻辑
-	print("Move button pressed for unit: %s" % _selected_unit.unit_data.name)
+## ActionMenu 行动选中回调
+func _on_action_selected(action_type: int) -> void:
+	if _selected_unit != null:
+		emit_signal("action_requested", action_type, _selected_unit)
+		# 选择行动后隐藏菜单
+		hide_action_menu()
 
 
-## 攻击按钮按下回调
-func _on_attack_button_pressed() -> void:
-	# TODO: 实现攻击逻辑
-	print("Attack button pressed for unit: %s" % _selected_unit.unit_data.name)
-
-
-## 待机按钮按下回调
-func _on_wait_button_pressed() -> void:
-	# TODO: 实现待机逻辑
-	print("Wait button pressed for unit: %s" % _selected_unit.unit_data.name)
-	# 选择待机后清除选择
-	hide_unit_info()
-	hide_action_buttons()
+## 获取当前选中单位
+func get_selected_unit() -> UnitInstance:
+	return _selected_unit

@@ -648,8 +648,6 @@ func _play_land_animation() -> void:
 	if not animated_sprite:
 		return
 
-	# 当前位置（从 airborne 位置开始）
-	var current_pos := Vector2(0, airborne_unit_offset)
 	# 目标位置：地面位置
 	var target_pos := Vector2.ZERO
 
